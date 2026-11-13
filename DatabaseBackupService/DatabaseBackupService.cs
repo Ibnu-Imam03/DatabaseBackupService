@@ -19,7 +19,15 @@ namespace DatabaseBackupService
 
             ServiceName = "DatabaseBackupService";
         }
+        public void StartDebugging(string[] args)
+        {
+            OnStart(args);
+        }
 
+        public void StopDebugging()
+        {
+            OnStop();
+        }
         protected override void OnStart(string[] args)
         {
             try

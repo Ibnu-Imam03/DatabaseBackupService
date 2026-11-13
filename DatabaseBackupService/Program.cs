@@ -1,25 +1,41 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿
+using System;
 using System.ServiceProcess;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DatabaseBackupService
 {
     internal static class Program
     {
-        /// <summary>
-        /// The main entry point for the application.
-        /// </summary>
-        static void Main()
+        static void Main(string[] args)
         {
-            ServiceBase[] ServicesToRun;
-            ServicesToRun = new ServiceBase[]
+            if (Environment.UserInteractive)
             {
-                new DatabaseBackupService()
-            };
-            ServiceBase.Run(ServicesToRun);
+                using (DatabaseBackupService service =new DatabaseBackupService())
+                {
+                    Console.WriteLine("Database Backup Service - Debug Mode");
+
+                    service.StartDebugging(args);
+
+                    Console.WriteLine("Service is running...");
+
+                    Console.WriteLine("Press ENTER to stop the service.");
+
+                    Console.ReadLine();
+
+                    service.StopDebugging();
+
+                    Console.WriteLine("Service stopped.");
+
+                }
+            }
+            else
+            {
+                ServiceBase.Run(
+                    new ServiceBase[]
+                    {
+                        new DatabaseBackupService()
+                    });
+            }
         }
     }
 }
