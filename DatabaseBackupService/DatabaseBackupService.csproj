@@ -51,6 +51,7 @@
     <Compile Include="DatabaseBackupService.Designer.cs">
       <DependentUpon>DatabaseBackupService.cs</DependentUpon>
     </Compile>
+    <Compile Include="Logger.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
